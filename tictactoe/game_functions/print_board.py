@@ -10,3 +10,4 @@ def print_board(array_game:list[str]):
             print()
             if i != len(array_game) - 1:
                 print("______")
+    print()
