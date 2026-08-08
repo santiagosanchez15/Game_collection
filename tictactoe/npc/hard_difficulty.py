@@ -18,8 +18,8 @@ def Best_Next_Move(array_game:list[str], depth, isMaximizingPlayer):
         if is_available(array_game,i): #check if available if so, add it
             array_game[i] = 'O' #give value to space taken
 
-            score:int = minimax(array_game, 0, True) #get score from MiniMax algorithm
-            array_game[i] = '_'#Give space previous value, no need to allocate more memory for another array
+            score:int = minimax(array_game, 0, False) #get score from MiniMax algorithm
+            array_game[i] = ''#Give space previous value, no need to allocate more memory for another array
 
             if score > best_score: #check if score beats previous best score if so, update
                 best_score = score
