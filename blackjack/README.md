@@ -15,5 +15,5 @@ The game is played with the traditional deck of cards A, 2, 3,4,5,6,7,8,9,10 J, 
 - If the house is closes to 21, all the players lose
 - The players are competing against the house, not against each other
 
-## Sidenots
+## Side notes
 I may include the option to divide if gotten two cards of the same, but I not sure.
