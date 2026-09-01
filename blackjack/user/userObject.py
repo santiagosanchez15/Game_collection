@@ -8,7 +8,6 @@ class User(Player):
     '''User class inherits from Player'''
 
     def __init__(self, name : str |None):
-        self.wantsCard :bool = False
         super().__init__(name=name)
 
     def Print_Cards(self):
@@ -48,11 +47,6 @@ class User(Player):
         if self.Is_Ace(card): #Check if card is ace
             card = self.choose_value_ace() #Get value for Ace
         self.Add_card_deck(card) #add card to deck
-
-
-    def Get_Total(self) -> int:
-        '''Return total amount of cards'''
-        return self.ValueDeck
 
     def check_valid_yes_no(self) -> bool:
         '''Check if input is valid yes or no'''
@@ -109,9 +103,49 @@ class User(Player):
         '''Recalculate total depending on the number of Ace on deck'''
 
         print(f"The current value of your deck is f{self.ValueDeck}- Do you want to reacalculate your Ace value? ")
-    
+        wants_recalculate: bool = self.check_valid_yes_no()
+        if wants_recalculate is False: #Didnt want to reacalculate return
+            return
+        num_ace_deck : int = self.num_ace_inDeck() #get number of ace in deck
+        print(f"There are {num_ace_deck} Ace(s) in your deck\n")
+        num_ace_recalculate : int = self.check_num_ace_recalcualte(num_ace_deck) #check the num of ace to recalculate
+        num_changes :int = 0 # keep track of num changes
+
+        #user choses new ace values
+        for i, card in enumerate(self.deck): #loop through de cards
+
+            if num_changes >= num_ace_recalculate: # change if num max of changes reached
+                break
+
+            if card != "11" or card != "1": #check if current card is an ace value
+                continue
+
+            print(f"The current card has a value of {card} do you want to change it?\n")
+            wants_change :str = self.check_valid_yes_no()
+
+            if wants_change is False: 
+                continue
+            
+            self.deck[i] = self.choose_value_ace() #Choose new value for ace
+            self.Calculate_total_deck() #Recalculate value
+            num_changes += 1 #one more change
+
+        return
 
 
+    #FIXME maybe delete function below
+    def check_num_ace_recalcualte(self, num_ace: int):
+        '''Check valid input for number of ace to recalculate'''
+
+        user_input : str= input("\nHow many ACE do you want to recalcualte? ").lower().strip() #get clean input from user
+        try: 
+            if user_input < "0" or user_input > str(num_ace):
+                raise ValueError
+            return int(user_input)
+
+        except ValueError:
+            print("Wrong input please try again| values in range")
+            return self.Calculate_total_ace()
 
 
         
