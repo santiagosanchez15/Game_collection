@@ -21,8 +21,12 @@ def blackjack(user: User, house: House): #pseudocode for balckjack game
     while True: 
 
         #check if any of the players wants another card
-        user_input : bool =user.get_Card()
-        house_input : bool = house.get_Card()
+        user.get_Card()
+        house.get_Card()
+
+         #Check if None of the players wants to keep playing
+        if user.wantsCard is False and house.wantsCard is False:
+            return user.check_winner(house)
 
         #FIXME need a function to recalcualte all the ace in the deck Maybe a dict that has a count of the number of card like {"A": 1, "2": 0, } value given by that
         
@@ -36,8 +40,6 @@ def blackjack(user: User, house: House): #pseudocode for balckjack game
             print(f"You won the House is over 21! Congratulations!!")
             return True
 
-        #Check if None of the players wants to keep playing
-        if user_input is False and house_input is False:
-            return user.check_winner(house)
+       
 
 
